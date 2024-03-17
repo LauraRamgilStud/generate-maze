@@ -12,7 +12,7 @@ export function generateModel(obj) {
   return model;
 }
 
-function generateMazeWithEnd(start, end) {
+function generateMazeWithEnd(start, goal) {
   let cellsVisited = 1; // Start with 1 since the starting cell is visited
   const totalCells = model.rows * model.cols;
 
@@ -53,7 +53,7 @@ function generateMazeWithEnd(start, end) {
   }
 
   // Ensure the end cell is reachable from the start cell
-  let endCell = model.maze[end.row][end.col];
+  let endCell = model.maze[goal.row][goal.col];
   while (!endCell.visited) {
     // Randomly choose a neighboring cell and carve a passage to it
     let neighbors = getAllNeighbors(endCell).filter((cell) => cell.visited);
@@ -84,49 +84,6 @@ function generateMazeWithEnd(start, end) {
   return model.maze;
 }
 
-/* function generateAldousBroder(start) {
-  let cellsVisited = 0;
-  const totalCells = model.rows * model.cols;
-
-  let current = model.maze[start.row][start.col];
-  current.visited = true;
-  cellsVisited++;
-
-  while (cellsVisited < totalCells) {
-    let neighbors = getAllNeighbors(current);
-    if (neighbors.length > 0) {
-      let randomNeighbor =
-        neighbors[Math.floor(Math.random() * neighbors.length)];
-
-      let nextCell = model.maze[randomNeighbor.row][randomNeighbor.col];
-
-      if (!nextCell.visited) {
-        // Determine direction
-        if (randomNeighbor.row === current.row) {
-          if (randomNeighbor.col > current.col) {
-            current.east = false;
-            nextCell.west = false; // Remove wall from the neighboring cell
-          } else {
-            current.west = false;
-            nextCell.east = false; // Remove wall from the neighboring cell
-          }
-        } else {
-          if (randomNeighbor.row > current.row) {
-            current.south = false;
-            nextCell.north = false; // Remove wall from the neighboring cell
-          } else {
-            current.north = false;
-            nextCell.south = false; // Remove wall from the neighboring cell
-          }
-        }
-        current.visited = true;
-        cellsVisited++;
-      }
-      current = nextCell;
-    }
-  }
-} */
-
 function getAllNeighbors(cell) {
   const neighbors = [];
   const { row, col } = cell;
@@ -134,21 +91,6 @@ function getAllNeighbors(cell) {
   if (row < model.rows - 1) neighbors.push({ row: row + 1, col: col }); // South neighbor
   if (col > 0) neighbors.push({ row: row, col: col - 1 }); // West neighbor
   if (col < model.cols - 1) neighbors.push({ row: row, col: col + 1 }); // East neighbor
-  return neighbors;
-}
-
-function getNeighborsNotVisited(cell) {
-  const neighbors = [];
-  const { row, col } = cell;
-  if (row > 0 && !model.maze[row - 1][col].visited)
-    neighbors.push({ row: row - 1, col: col });
-  if (row < model.rows - 1 && !model.maze[row + 1][col].visited)
-    neighbors.push({ row: row + 1, col: col });
-  if (col > 0 && !model.maze[row][col - 1].visited)
-    neighbors.push({ row: row, col: col - 1 });
-  if (col < model.cols - 1 && !model.maze[row][col + 1].visited)
-    neighbors.push({ row: row, col: col + 1 });
-  console.log(neighbors);
   return neighbors;
 }
 
