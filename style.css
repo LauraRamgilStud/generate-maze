@@ -2,11 +2,12 @@
   width: 200px;
   display: grid;
   grid-template-columns: repeat(var(--GRID_WIDTH), 1fr);
-  border: 1px black solid;
+  /* border: 1px black solid;
+  gap: none; */
 }
 
 .cell {
   aspect-ratio: 1;
-  background-color: white;
-  border: 1px gray solid;
+  background-color: white; /* 
+  border: thin black solid; */
 }
