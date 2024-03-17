@@ -23,7 +23,6 @@ function generateAldousBroder(start) {
     if (neighbors.length > 0) {
       let randomNeighbor =
         neighbors[Math.floor(Math.random() * neighbors.length)];
-      console.log(randomNeighbor);
 
       if (randomNeighbor.row === current.row) {
         if (randomNeighbor.col > current.col) {
