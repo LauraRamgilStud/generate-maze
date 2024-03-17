@@ -1,0 +1,12 @@
+#maze {
+  width: 200px;
+  display: grid;
+  grid-template-columns: repeat(var(--GRID_WIDTH), 1fr);
+  border: 1px black solid;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: white;
+  border: 1px gray solid;
+}
